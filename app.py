@@ -31,6 +31,7 @@ def merge_pdfs():
         
         files = request.files.getlist('files')
         output_name = request.form.get('outputName', 'merged.pdf')
+
         
         if not files:
             return jsonify({'error': 'No files selected'}), 400
@@ -69,10 +70,12 @@ def merge_pdfs():
             output_path,
             as_attachment=True,
             download_name=output_name
+            print(f"File {output_name} created successfully at {output_path}")
         )
+        print(f"File {output_name} created successfully at {output_path}")
     
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
+        print(f"Error during merging: {str(e)}")
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
