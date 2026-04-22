@@ -1,6 +1,6 @@
 from flask import Flask, request, send_file, jsonify
 from flask_cors import CORS
-from PyPDF2 import PdfMerger
+from PyPDF2 import PdfMerger, PdfReader, PdfWriter
 import os
 import tempfile
 from werkzeug.utils import secure_filename
@@ -51,7 +51,19 @@ def merge_pdfs():
         # Merge PDFs
         merger = PdfMerger()
         for pdf_path in pdf_paths:
-            merger.append(pdf_path)
+            try:
+                # Try to read the PDF to handle encryption
+                reader = PdfReader(pdf_path)
+                
+                # If encrypted, try to decrypt with empty password
+                if reader.is_encrypted:
+                    reader.decrypt("")
+                
+                merger.append(pdf_path)
+            except Exception as e:
+                print(f"Warning: Could not process {pdf_path}: {str(e)}")
+                # Continue with other files even if one fails
+                continue
         
         # Ensure output name has .pdf extension
         if not output_name.endswith('.pdf'):
@@ -66,16 +78,15 @@ def merge_pdfs():
             os.remove(pdf_path)
         
         # Send merged file
+        print(f"File {output_name} created successfully at {output_path}")
         return send_file(
             output_path,
             as_attachment=True,
             download_name=output_name
-            print(f"File {output_name} created successfully at {output_path}")
         )
-        print(f"File {output_name} created successfully at {output_path}")
     
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
         print(f"Error during merging: {str(e)}")
+        return jsonify({'error': str(e)}), 500
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
