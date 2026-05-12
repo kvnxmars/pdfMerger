@@ -26,7 +26,7 @@ function App() {
       files.forEach((file) => formData.append('files', file));
       formData.append('outputName', outputName);
 
-      const response = await fetch('http://localhost:5000/api/merge', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}api/merge`, {
         method: 'POST',
         body: formData,
       });
