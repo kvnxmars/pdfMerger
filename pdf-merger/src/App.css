@@ -1,0 +1,343 @@
+* { box-sizing: border-box; }
+
+.App {
+  min-height: 100vh;
+  background: #0a0a0f;
+  display: flex;
+  align-items: stretch;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* ── Left panel (desktop only) ────────────────────── */
+.panel-left {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .panel-left {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 56px;
+    background: #0d0d14;
+    border-right: 1px solid #151520;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .panel-right {
+    flex: 1;
+    padding: 60px 56px;
+    align-items: center;
+  }
+
+  .container {
+    max-width: 400px;
+  }
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+.orb1 {
+  width: 320px; height: 320px;
+  background: rgba(124, 92, 252, 0.12);
+  top: -80px; left: -60px;
+}
+.orb2 {
+  width: 200px; height: 200px;
+  background: rgba(56, 189, 248, 0.07);
+  bottom: 60px; right: 20px;
+}
+
+.left-content {
+  position: relative;
+  z-index: 1;
+}
+
+.left-logo {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #555570;
+  margin-bottom: 48px;
+}
+
+.left-headline {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #f0f0f8;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+
+.left-headline span { color: #7c5cfc; }
+
+.left-desc {
+  font-size: 14px;
+  color: #555570;
+  line-height: 1.7;
+  max-width: 300px;
+  margin-bottom: 48px;
+}
+
+.stat-row {
+  display: flex;
+  gap: 32px;
+}
+
+.stat-num {
+  font-size: 22px;
+  font-weight: 600;
+  color: #f0f0f8;
+  letter-spacing: -0.5px;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: #444458;
+  margin-top: 2px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ── Right panel ──────────────────────────────────── */
+.panel-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 460px;
+}
+
+.brand {
+  margin-bottom: 36px;
+}
+
+.brand h1 {
+  font-size: 26px;
+  font-weight: 600;
+  color: #f0f0f8;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #555570;
+  margin: 0;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #888899;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── File drop zone ───────────────────────────────── */
+.file-drop {
+  border: 1px dashed #2a2a40;
+  border-radius: 10px;
+  padding: 28px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.25s, background 0.25s;
+  background: #111118;
+  position: relative;
+}
+
+.file-drop:hover {
+  border-color: #7c5cfc;
+  background: #13111f;
+}
+
+.file-drop input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.file-drop input[type="file"]:disabled {
+  cursor: not-allowed;
+}
+
+.drop-icon {
+  width: 32px;
+  height: 32px;
+  margin: 0 auto 10px;
+  opacity: 0.5;
+}
+
+.drop-text {
+  font-size: 13px;
+  color: #555570;
+}
+
+.drop-text strong {
+  color: #7c5cfc;
+  font-weight: 500;
+}
+
+/* ── File list ────────────────────────────────────── */
+.file-list {
+  margin-top: 12px;
+  background: #111118;
+  border: 1px solid #1e1e2e;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.files-count {
+  padding: 8px 12px;
+  font-size: 11px;
+  color: #555570;
+  border-bottom: 1px solid #1e1e2e;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.file-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.file-list li {
+  padding: 8px 12px;
+  color: #9090aa;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #1a1a28;
+}
+
+.file-list li:last-child {
+  border-bottom: none;
+}
+
+.file-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #7c5cfc;
+  flex-shrink: 0;
+}
+
+/* ── Text input ───────────────────────────────────── */
+input[type="text"] {
+  width: 100%;
+  padding: 11px 14px;
+  background: #111118;
+  border: 1px solid #1e1e2e;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #d0d0e8;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+input[type="text"]:hover:not(:disabled) { border-color: #2e2e50; }
+input[type="text"]:focus { border-color: #7c5cfc; }
+input[type="text"]:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Neon liquid button ───────────────────────────── */
+.merge-button {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.02em;
+  background: #7c5cfc;
+  color: #fff;
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+
+.merge-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.14);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.merge-button:hover::before { left: 120%; }
+
+.merge-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 20px rgba(124, 92, 252, 0.5),
+    0 0 48px rgba(124, 92, 252, 0.2);
+}
+
+.merge-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.merge-button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ── Messages ─────────────────────────────────────── */
+.message {
+  margin-top: 16px;
+  padding: 11px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  animation: slideIn 0.25s ease-out;
+}
+
+.message.success {
+  background: #0e1f16;
+  color: #4ade80;
+  border: 1px solid #1a3a26;
+}
+
+.message.error {
+  background: #1f0e12;
+  color: #f87171;
+  border: 1px solid #3a1a20;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
